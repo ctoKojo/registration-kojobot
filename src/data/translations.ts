@@ -219,16 +219,16 @@ const translations: Record<Language, Translations> = {
         optional: " (اختياري) ",
       },
       childName: {
-        title: "ما هو اسم الطالب؟",
+        title: "اسم الطالب",
         placeholder: "أدخل اسم الطالب",
       },
       childAge: {
-        title: " كم عمر الطالب؟ ",
+        title: " عمر الطالب ",
         placeholder: "أدخل العمر",
         range: " (بين 6-18) ",
       },
       childGrade: {
-        title: "ما هو الصف الدراسي للطالب؟",
+        title: "الصف الدراسي للطالب",
         placeholder: "اختر الصف",
       },
       previousCourse: {
@@ -237,16 +237,16 @@ const translations: Record<Language, Translations> = {
         no: "لا",
       },
       courseName: {
-        title: "ما هو اسم المسابقه و المركز الحاصل عليه؟",
+        title: " اسم المسابقه و المركز الحاصل عليه ",
         placeholder: "أدخل اسم المسابقة والمركز",
       },
       hasComputer: {
-        title: "هل الطالب عنده لابتوب أو كمبيوتر؟",
+        title: "هل لدى الطالب لابتوب أو كمبيوتر؟",
         yes: "نعم",
         no: "لا",
       },
       courseType: {
-        title: "مكان التدريب المفضل؟",
+        title: "مكان التدريب المفضل",
         online: "اونلاين",
         offline: "أوفلاين",
         location: "(في مقر الأكاديمية بالمنصورة)",
