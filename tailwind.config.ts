@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -52,17 +53,23 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
-				}
+                formBg: {
+                    DEFAULT: 'rgba(255, 255, 255, 0.15)',
+                },
+                btnPrimary: {
+                    DEFAULT: '#ffffff',
+                    foreground: '#6455F0',
+                },
+                btnSecondary: {
+                    DEFAULT: 'rgba(255, 255, 255, 0.2)',
+                    foreground: '#ffffff',
+                }
 			},
+            fontFamily: {
+                poppins: ['Poppins', 'sans-serif'],
+                cairo: ['Cairo', 'sans-serif'],
+                tajawal: ['Tajawal', 'sans-serif'],
+            },
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
@@ -84,11 +91,44 @@ export default {
 					to: {
 						height: '0'
 					}
-				}
+				},
+                'fade-in': {
+                    from: {
+                        opacity: '0',
+                        transform: 'translateY(20px)'
+                    },
+                    to: {
+                        opacity: '1',
+                        transform: 'translateY(0)'
+                    }
+                },
+                'slide-in': {
+                    from: {
+                        transform: 'translateX(50px)',
+                        opacity: '0'
+                    },
+                    to: {
+                        transform: 'translateX(0)',
+                        opacity: '1'
+                    }
+                },
+                'slide-out': {
+                    from: {
+                        transform: 'translateX(0)',
+                        opacity: '1'
+                    },
+                    to: {
+                        transform: 'translateX(-50px)',
+                        opacity: '0'
+                    }
+                }
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+                'fade-in': 'fade-in 0.5s ease-out forwards',
+                'slide-in': 'slide-in 0.4s ease-out forwards',
+                'slide-out': 'slide-out 0.4s ease-out forwards'
 			}
 		}
 	},
