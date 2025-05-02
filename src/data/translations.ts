@@ -1,4 +1,3 @@
-
 export type Language = 'en' | 'ar';
 
 export interface Translations {
@@ -11,6 +10,10 @@ export interface Translations {
   submit: string;
   loading: string;
   thankYou: {
+    title: string;
+    message: string;
+  };
+  success: {
     title: string;
     message: string;
   };
@@ -95,6 +98,10 @@ const translations: Record<Language, Translations> = {
     thankYou: {
       title: "Thank You!",
       message: "Your registration has been submitted successfully. We will contact you soon.",
+    },
+    success: {
+      title: "Success!",
+      message: "Your registration has been submitted successfully.",
     },
     questions: {
       guardianName: {
@@ -188,6 +195,10 @@ const translations: Record<Language, Translations> = {
     thankYou: {
       title: "شكرا لك!",
       message: "تم تسجيل طلبك بنجاح. سنتواصل معك قريبا.",
+    },
+    success: {
+      title: "تم بنجاح!",
+      message: "تم تسجيل طلبك بنجاح.",
     },
     questions: {
       guardianName: {
