@@ -7,7 +7,7 @@ interface FormFieldProps {
   optional?: string;
   children: ReactNode;
   error?: string;
-  language: Language;
+  language: Language; 
 }
 
 const FormField: React.FC<FormFieldProps> = ({ 
