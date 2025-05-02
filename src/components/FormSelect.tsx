@@ -15,7 +15,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
   value,
   onChange,
   options,
-  placeholder,
+  placeholder, 
   name,
   required = false,
   dir = "auto",
