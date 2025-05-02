@@ -23,7 +23,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ onSelect }) => {
             onClick={() => onSelect("ar")}
             className="py-3 sm:py-4 px-6 rounded-lg bg-white/20 text-white text-lg sm:text-xl hover:bg-white/30 transition-all duration-300 ease-in-out font-cairo hover:scale-105 active:scale-95"
           >
-            عربي
+            عربيي
           </button>
           
           <button
