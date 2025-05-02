@@ -27,7 +27,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
       name={name}
       required={required}
       dir={dir}
-      className="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
+      className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/20 border border-white/30 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-white/50 transition-all text-sm sm:text-base"
     >
       {placeholder && (
         <option value="" disabled className="text-gray-400">

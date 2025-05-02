@@ -46,13 +46,29 @@
     @apply border-border;
   }
 
+  html, body {
+    @apply overscroll-none;
+  }
+
   body {
     @apply bg-background text-foreground;
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    height: -webkit-fill-available;
     background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
     color: white;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    body {
+      min-height: -webkit-fill-available;
+    }
+  }
+
+  input, select, button {
+    font-size: 16px; /* Prevents iOS zoom on input focus */
   }
 
   .font-english {

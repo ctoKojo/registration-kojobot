@@ -11,6 +11,7 @@ import RadioGroup from "./RadioGroup";
 import ThankYou from "./ThankYou";
 import supabase from "../lib/supabaseClient";
 import { useToast } from "@/components/ui/use-toast";
+import { useIsMobile } from "../hooks/use-mobile";
 
 interface FormData {
   guardianName: string;
@@ -49,6 +50,7 @@ interface RegistrationFormProps {
 const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
   const { toast } = useToast();
   const t = translations[language];
+  const isMobile = useIsMobile();
   
   const [currentStep, setCurrentStep] = useState(0);
   const [animationDirection, setAnimationDirection] = useState<"next" | "prev" | "none">("none");
@@ -268,8 +270,8 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
   }
   
   return (
-    <div className={`min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 ${language === 'ar' ? 'rtl' : 'ltr'}`}>
-      <div className="bg-white/20 backdrop-blur-sm p-6 sm:p-8 rounded-xl shadow-lg w-full max-w-md">
+    <div className={`min-h-screen flex flex-col items-center justify-center p-3 sm:p-6 ${language === 'ar' ? 'rtl' : 'ltr'}`}>
+      <div className="bg-white/20 backdrop-blur-sm p-4 sm:p-8 rounded-xl shadow-lg w-full max-w-md">
         <Logo />
         
         <ProgressBar 
@@ -278,7 +280,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
           language={language} 
         />
         
-        <form onSubmit={(e) => { e.preventDefault(); handleNext(); }}>
+        <form onSubmit={(e) => { e.preventDefault(); handleNext(); }} className="mt-4">
           {/* Guardian Name */}
           <FormStep 
             language={language} 
@@ -563,12 +565,12 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
           </FormStep>
           
           {/* Navigation Buttons */}
-          <div className={`mt-8 flex ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'} justify-between gap-4`}>
+          <div className={`mt-6 sm:mt-8 flex ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'} justify-between gap-2 sm:gap-4`}>
             {currentStep > 0 && (
               <button
                 type="button"
                 onClick={handlePrev}
-                className="px-6 py-3 rounded-lg bg-white/20 text-white hover:bg-white/30 transition-all duration-200 flex-1"
+                className="px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-white/20 text-white hover:bg-white/30 transition-all duration-200 flex-1 text-sm sm:text-base"
                 disabled={isSubmitting}
               >
                 {t.prev}
@@ -577,16 +579,16 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
             
             <button
               type="submit"
-              className={`px-6 py-3 rounded-lg ${
+              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg ${
                 currentStep === totalSteps
                   ? "bg-white text-[#6455F0] font-medium hover:bg-white/90"
                   : "bg-white text-[#6455F0] font-medium hover:bg-white/90"
-              } transition-all duration-200 flex-1 flex justify-center items-center`}
+              } transition-all duration-200 flex-1 flex justify-center items-center text-sm sm:text-base`}
               disabled={isSubmitting}
             >
               {isSubmitting ? (
                 <>
-                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-[#6455F0]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <svg className="animate-spin -ml-1 mr-2 h-3 w-3 sm:h-4 sm:w-4 text-[#6455F0]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>

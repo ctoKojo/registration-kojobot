@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Language } from "../data/translations";
+import { useIsMobile } from "../hooks/use-mobile";
 
 interface RadioOption {
   value: string;
@@ -22,12 +23,14 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
   name,
   language,
 }) => {
+  const isMobile = useIsMobile();
+  
   return (
-    <div className={`flex flex-col sm:flex-row gap-4 ${language === 'ar' ? 'rtl' : 'ltr'}`}>
+    <div className={`flex flex-col gap-3 ${language === 'ar' ? 'rtl' : 'ltr'}`}>
       {options.map((option) => (
         <label
           key={option.value}
-          className={`flex items-center p-4 rounded-lg cursor-pointer transition-all duration-200
+          className={`flex items-center p-3 sm:p-4 rounded-lg cursor-pointer transition-all duration-200 text-sm sm:text-base
             ${
               selectedValue === option.value
                 ? "bg-white text-[#6455F0] font-medium"

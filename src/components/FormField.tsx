@@ -18,18 +18,18 @@ const FormField: React.FC<FormFieldProps> = ({
   language 
 }) => {
   return (
-    <div className="mb-6">
-      <label className="block text-xl font-semibold mb-2">
+    <div className="mb-5 sm:mb-6">
+      <label className="block text-lg sm:text-xl font-semibold mb-2">
         {label}
         {optional && (
-          <span className="text-sm font-normal opacity-80 ml-1">
+          <span className="text-xs sm:text-sm font-normal opacity-80 ml-1">
             {optional}
           </span>
         )}
       </label>
       {children}
       {error && (
-        <p className={`text-red-300 mt-2 text-sm ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+        <p className={`text-red-300 mt-2 text-xs sm:text-sm ${language === 'ar' ? 'text-right' : 'text-left'}`}>
           {error}
         </p>
       )}
