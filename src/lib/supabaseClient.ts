@@ -1,11 +1,9 @@
 
 import { createClient } from '@supabase/supabase-js';
 
-// These would typically be environment variables
-// For this example, they're directly included
-// In a real app, use .env files or other secure methods
-const supabaseUrl = 'https://your-supabase-url.supabase.co';
-const supabaseAnonKey = 'your-anon-key';
+// Initialize the Supabase client with the correct credentials
+const supabaseUrl = 'https://qpookkgjqwhromusnsur.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFwb29ra2dqcXdocm9tdXNuc3VyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYxMTIwNDksImV4cCI6MjA2MTY4ODA0OX0.SBrftkk59PcAS8MHfiIdse7HELLPYAJqFWt47oTk-nM';
 
 // Initialize the Supabase client
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
