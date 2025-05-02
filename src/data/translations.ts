@@ -84,7 +84,6 @@ export interface Translations {
   };
   grades: string[];
 }
-
 const translations: Record<Language, Translations> = {
   en: {
     languageSelect: "Choose your language",
@@ -105,58 +104,58 @@ const translations: Record<Language, Translations> = {
     },
     questions: {
       guardianName: {
-        title: "What is your full name?",
-        placeholder: "Enter your full name",
+        title: "What is the full name of the guardian?",
+        placeholder: "Enter guardian's full name",
       },
       mobileNumber: {
-        title: "What is your mobile number?",
-        placeholder: "Enter your mobile number",
+        title: "What is the guardian's mobile number?",
+        placeholder: " 010xxxxxxxx ",
       },
       whatsAppNumber: {
-        title: "What is your WhatsApp number? (if different)",
-        placeholder: "Enter your WhatsApp number",
+        title: "What is the guardian's WhatsApp number?",
+        placeholder: " 010xxxxxxxx ",
         optional: "(Optional if same as mobile)",
       },
       email: {
-        title: "What is your email address?",
-        placeholder: "Enter your email address",
+        title: "What is the guardian's email address?",
+        placeholder: "example@gmail.com",
         optional: "(Optional)",
       },
       childName: {
-        title: "What is your child's name?",
-        placeholder: "Enter child's name",
+        title: "What is the student's name?",
+        placeholder: "Enter student's name",
       },
       childAge: {
-        title: "How old is your child?",
+        title: "What is the student's age?",
         placeholder: "Enter age",
         range: "(between 6-18)",
       },
       childGrade: {
-        title: "What grade is your child in?",
+        title: "What grade is the student in?",
         placeholder: "Select grade",
       },
       previousCourse: {
-        title: "Has your child taken a programming course before?",
+        title: "Has the student participated in programming competitions before?",
         yes: "Yes",
         no: "No",
       },
       courseName: {
-        title: "What was the course name or provider?",
-        placeholder: "Enter course name/provider",
+        title: "What is the name of the competition and the rank achieved?",
+        placeholder: "Enter competition name and rank",
       },
       hasComputer: {
-        title: "Does your child have a personal computer or laptop?",
+        title: "Does the student have a laptop or computer?",
         yes: "Yes",
         no: "No",
       },
       courseType: {
-        title: "What type of course are you interested in?",
+        title: "Preferred training location?",
         online: "Online",
         offline: "Offline",
-        location: "(Mansoura academy)",
+        location: "(At our academy in Mansoura)",
       },
       contactForDetails: {
-        title: "Would you like us to contact you for more details?",
+        title: "Would you like us to contact you or provide more details?",
         yes: "Yes",
         no: "No",
       },
@@ -202,58 +201,58 @@ const translations: Record<Language, Translations> = {
     },
     questions: {
       guardianName: {
-        title: "ما هو الاسم الكامل لولي الأمر؟",
+        title: "الاسم الكامل لولي الامر",
         placeholder: "أدخل الاسم الكامل",
       },
       mobileNumber: {
-        title: "ما هو رقم الموبايل الخاص بك؟",
-        placeholder: "أدخل رقم الموبايل",
+        title: "رقم الموبايل الخاص بولي الامر",
+        placeholder: " 010xxxxxxxx ",
       },
       whatsAppNumber: {
-        title: "ما هو رقم الواتساب الخاص بك؟ (إذا كان مختلفًا)",
-        placeholder: "أدخل رقم الواتساب",
-        optional: "(اختياري إذا كان هو نفس رقم الموبايل)",
+        title: " رقم الواتساب الخاص بولي الامر ",
+        placeholder: " 010xxxxxxxx ",
+        optional: " (اختياري إذا كان مختلف عن رقم الموبايل) ",
       },
       email: {
-        title: "ما هو عنوان البريد الإلكتروني الخاص بك؟",
-        placeholder: "أدخل البريد الإلكتروني",
-        optional: "(اختياري)",
+        title: " البريد الإلكتروني لولي الأمر ",
+        placeholder: "example@gmail.com",
+        optional: " (اختياري) ",
       },
       childName: {
-        title: "ما هو اسم طفلك؟",
-        placeholder: "أدخل اسم الطفل",
+        title: "ما هو اسم الطالب؟",
+        placeholder: "أدخل اسم الطالب",
       },
       childAge: {
-        title: "كم عمر طفلك؟",
+        title: " كم عمر الطالب؟ ",
         placeholder: "أدخل العمر",
-        range: "(بين 6-18)",
+        range: " (بين 6-18) ",
       },
       childGrade: {
-        title: "ما هو الصف الدراسي لطفلك؟",
+        title: "ما هو الصف الدراسي للطالب؟",
         placeholder: "اختر الصف",
       },
       previousCourse: {
-        title: "هل سبق وشارك الطفل في كورسات برمجة؟",
+        title: "هل سبق وشارك الطالب في مسابقات برمجه؟",
         yes: "نعم",
         no: "لا",
       },
       courseName: {
-        title: "ما هو اسم الكورس أو الجهة؟",
-        placeholder: "أدخل اسم الكورس/الجهة",
+        title: "ما هو اسم المسابقه و المركز الحاصل عليه؟",
+        placeholder: "أدخل اسم المسابقة والمركز",
       },
       hasComputer: {
-        title: "هل الطفل عنده لابتوب أو كمبيوتر؟",
+        title: "هل الطالب عنده لابتوب أو كمبيوتر؟",
         yes: "نعم",
         no: "لا",
       },
       courseType: {
-        title: "ما هو نوع الكورس المطلوب؟",
+        title: "مكان التدريب المفضل؟",
         online: "اونلاين",
         offline: "أوفلاين",
         location: "(في مقر الأكاديمية بالمنصورة)",
       },
       contactForDetails: {
-        title: "هل تحب نكلمك لمزيد من التفاصيل؟",
+        title: "هل تريد مزيد من التفاصيل او التواصل ؟",
         yes: "نعم",
         no: "لا",
       },
