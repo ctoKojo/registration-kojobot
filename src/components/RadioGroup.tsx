@@ -29,7 +29,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
     <div className={`flex flex-col gap-3 ${language === 'ar' ? 'rtl' : 'ltr'}`}>
       {options.map((option) => (
         <label
-          key={option.value}
+          key={option.value} 
           className={`flex items-center p-3 sm:p-4 rounded-lg cursor-pointer transition-all duration-200 text-sm sm:text-base
             ${
               selectedValue === option.value
