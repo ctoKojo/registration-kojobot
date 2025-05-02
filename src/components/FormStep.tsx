@@ -6,7 +6,7 @@ interface FormStepProps {
   children: ReactNode;
   language: Language;
   isActive: boolean;
-  direction: "next" | "prev" | "none";
+  direction: "next" | "prev" | "none"; 
 }
 
 const FormStep: React.FC<FormStepProps> = ({ 
