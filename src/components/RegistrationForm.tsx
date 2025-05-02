@@ -585,7 +585,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
                   : "bg-white text-[#6455F0] font-medium hover:bg-white/90"
               } transition-all duration-200 flex-1 flex justify-center items-center text-sm sm:text-base`}
               disabled={isSubmitting}
-            >
+            > 
               {isSubmitting ? (
                 <>
                   <svg className="animate-spin -ml-1 mr-2 h-3 w-3 sm:h-4 sm:w-4 text-[#6455F0]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
