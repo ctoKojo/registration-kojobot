@@ -5,7 +5,7 @@ interface ProgressBarProps {
   currentStep: number;
   totalSteps: number;
   language: 'en' | 'ar';
-}
+} 
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ currentStep, totalSteps, language }) => {
   const progress = (currentStep / (totalSteps - 1)) * 100;
