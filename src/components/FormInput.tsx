@@ -14,7 +14,7 @@ interface FormInputProps {
 }
 
 const FormInput: React.FC<FormInputProps> = ({
-  type = "text",
+  type = "text", 
   value,
   onChange,
   placeholder,
