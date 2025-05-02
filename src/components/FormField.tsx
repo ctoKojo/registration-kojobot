@@ -19,7 +19,7 @@ const FormField: React.FC<FormFieldProps> = ({
 }) => {
   return (
     <div className="mb-5 sm:mb-6">
-      <label className="block text-lg sm:text-xl font-semibold mb-2">
+      <label className={`block text-lg sm:text-xl font-semibold mb-2 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
         {label}
         {optional && (
           <span className="text-xs sm:text-sm font-normal opacity-80 ml-1">
