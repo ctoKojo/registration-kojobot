@@ -1,0 +1,79 @@
+
+import { useState } from "react";
+import { FormData } from "./useFormValidation";
+import { Language } from "../data/translations";
+import translations from "../data/translations";
+import supabase from "../lib/supabaseClient";
+import { useToast } from "@/hooks/use-toast";
+
+export const useFormSubmission = (language: Language) => {
+  const { toast } = useToast();
+  const t = translations[language];
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
+
+  // Helper function to categorize age groups
+  const getAgeCategory = (age: number): string => {
+    if (age >= 6 && age <= 9) return "6-9";
+    if (age >= 10 && age <= 13) return "10-13";
+    if (age >= 14 && age <= 18) return "14-18";
+    return "other";
+  };
+
+  const submitForm = async (formData: FormData) => {
+    try {
+      setIsSubmitting(true);
+      
+      // Map form data to database column names
+      const dataToInsert = {
+        guardianname: formData.guardianName,
+        mobilenumber: formData.mobileNumber,
+        whatsappnumber: formData.whatsAppNumber || null, // Handle optional field
+        email: formData.email || null, // Handle optional field
+        childname: formData.childName,
+        age: parseInt(formData.childAge),
+        grade: formData.childGrade,
+        learnedprogramming: formData.learnedProgramming,
+        previousprogramming: formData.learnedProgramming === "yes" ? formData.previousCourse : null,
+        coursename: formData.previousCourse === "yes" ? formData.courseName : null, // Handle conditional field
+        hascomputer: formData.hasComputer,
+        preferredcoursetype: formData.courseType,
+        contactconsent: formData.contactForDetails,
+        agecategory: getAgeCategory(parseInt(formData.childAge))
+      };
+      
+      // Insert data into Supabase
+      const { error } = await supabase
+        .from('student_registrations')
+        .insert([dataToInsert]);
+      
+      if (error) throw error;
+      
+      console.log("Form submitted successfully to Supabase");
+      toast({
+        title: t.success.title,
+        description: t.success.message,
+      });
+      
+      setIsComplete(true);
+      return true;
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: t.errors.submission,
+        description: error instanceof Error ? error.message : String(error),
+        variant: "destructive",
+      });
+      return false;
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return {
+    isSubmitting,
+    isComplete,
+    submitForm,
+    setIsComplete
+  };
+};
