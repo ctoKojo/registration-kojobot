@@ -1,3 +1,4 @@
+
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { Language } from "../data/translations";
 import translations from "../data/translations";
@@ -21,6 +22,7 @@ interface FormData {
   childName: string;
   childAge: string;
   childGrade: string;
+  learnedProgramming: string;
   previousCourse: string;
   courseName: string;
   hasComputer: string;
@@ -36,6 +38,7 @@ interface FormErrors {
   childName?: string;
   childAge?: string;
   childGrade?: string;
+  learnedProgramming?: string;
   previousCourse?: string;
   courseName?: string;
   hasComputer?: string;
@@ -65,6 +68,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
     childName: "",
     childAge: "",
     childGrade: "",
+    learnedProgramming: "",
     previousCourse: "",
     courseName: "",
     hasComputer: "",
@@ -74,8 +78,8 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
   
   const [errors, setErrors] = useState<FormErrors>({});
   
-  // Total number of steps (questions)
-  const totalSteps = 11;
+  // Total number of steps (questions) - now 12 with the new question
+  const totalSteps = 12;
   
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -95,8 +99,11 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
       setErrors({ ...errors, [name]: undefined });
     }
     
-    // Clear course name if previous course is set to "no"
-    if (name === "previousCourse" && value === "no") {
+    // Clear dependent field values based on selections
+    if (name === "learnedProgramming" && value === "no") {
+      setFormData((prev) => ({ ...prev, previousCourse: "", courseName: "" }));
+    }
+    else if (name === "previousCourse" && value === "no") {
       setFormData((prev) => ({ ...prev, courseName: "" }));
     }
   };
@@ -147,27 +154,32 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
           newErrors.childGrade = t.errors.required;
         }
         break;
-      case 7: // Previous Course
-        if (!formData.previousCourse) {
+      case 7: // Learned Programming
+        if (!formData.learnedProgramming) {
+          newErrors.learnedProgramming = t.errors.required;
+        }
+        break;
+      case 8: // Previous Course (only if learned programming is "yes")
+        if (formData.learnedProgramming === "yes" && !formData.previousCourse) {
           newErrors.previousCourse = t.errors.required;
         }
         break;
-      case 8: // Course Name (only if previous course is "yes")
+      case 9: // Course Name (only if previous course is "yes")
         if (formData.previousCourse === "yes" && !formData.courseName) {
           newErrors.courseName = t.errors.required;
         }
         break;
-      case 9: // Has Computer
+      case 10: // Has Computer
         if (!formData.hasComputer) {
           newErrors.hasComputer = t.errors.required;
         }
         break;
-      case 10: // Course Type
+      case 11: // Course Type
         if (!formData.courseType) {
           newErrors.courseType = t.errors.required;
         }
         break;
-      case 11: // Contact For Details
+      case 12: // Contact For Details
         if (!formData.contactForDetails) {
           newErrors.contactForDetails = t.errors.required;
         }
@@ -182,13 +194,21 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
   
   const handleNext = () => {
     if (validateStep()) {
-      if (currentStep === 7 && formData.previousCourse === "no") {
-        // Skip course name question if they haven't taken a course before
+      // Handle the various skip logic cases
+      if (currentStep === 7 && formData.learnedProgramming === "no") {
+        // Skip competition questions if they haven't learned programming
         setAnimationDirection("next");
-        setCurrentStep(currentStep + 2);
-      } else if (currentStep === totalSteps) {
+        setCurrentStep(10); // Jump to computer question
+      } 
+      else if (currentStep === 8 && formData.previousCourse === "no") {
+        // Skip course name question if they haven't taken a course
+        setAnimationDirection("next");
+        setCurrentStep(10); // Jump to computer question
+      } 
+      else if (currentStep === totalSteps) {
         handleSubmit();
-      } else {
+      } 
+      else {
         setAnimationDirection("next");
         setCurrentStep(currentStep + 1);
       }
@@ -196,11 +216,23 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
   };
   
   const handlePrev = () => {
-    if (currentStep === 9 && formData.previousCourse === "no") {
+    // Handle backwards navigation with skip logic
+    if (currentStep === 10 && formData.learnedProgramming === "no") {
+      // Go back to learned programming question
+      setAnimationDirection("prev");
+      setCurrentStep(7);
+    }
+    else if (currentStep === 10 && formData.previousCourse === "no") {
+      // Go back to previous course question
+      setAnimationDirection("prev");
+      setCurrentStep(8);
+    }
+    else if (currentStep === 9 && formData.previousCourse === "no") {
       // Skip course name when going backwards too
       setAnimationDirection("prev");
-      setCurrentStep(currentStep - 2);
-    } else {
+      setCurrentStep(7);
+    }
+    else {
       setAnimationDirection("prev");
       setCurrentStep(currentStep - 1);
     }
@@ -222,7 +254,8 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
           childname: formData.childName,
           age: parseInt(formData.childAge),
           grade: formData.childGrade,
-          previousprogramming: formData.previousCourse,
+          learnedprogramming: formData.learnedProgramming,
+          previousprogramming: formData.learnedProgramming === "yes" ? formData.previousCourse : null,
           coursename: formData.previousCourse === "yes" ? formData.courseName : null, // Handle conditional field
           hascomputer: formData.hasComputer,
           preferredcoursetype: formData.courseType,
@@ -445,10 +478,34 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
             </FormField>
           </FormStep>
           
-          {/* Previous Course */}
+          {/* Learned Programming - New Question */}
           <FormStep 
             language={language} 
             isActive={currentStep === 7} 
+            direction={animationDirection}
+          >
+            <FormField 
+              label={t.questions.learnedProgramming.title} 
+              error={errors.learnedProgramming} 
+              language={language}
+            >
+              <RadioGroup
+                name="learnedProgramming"
+                options={[
+                  { value: "yes", label: t.questions.learnedProgramming.yes },
+                  { value: "no", label: t.questions.learnedProgramming.no }
+                ]}
+                selectedValue={formData.learnedProgramming}
+                onChange={(value) => handleRadioChange("learnedProgramming", value)}
+                language={language}
+              />
+            </FormField>
+          </FormStep>
+          
+          {/* Previous Course (only if learned programming is "yes") */}
+          <FormStep 
+            language={language} 
+            isActive={currentStep === 8 && formData.learnedProgramming === "yes"} 
             direction={animationDirection}
           >
             <FormField 
@@ -472,7 +529,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
           {/* Course Name (only if previous course is "yes") */}
           <FormStep 
             language={language} 
-            isActive={currentStep === 8 && formData.previousCourse === "yes"} 
+            isActive={currentStep === 9 && formData.previousCourse === "yes"} 
             direction={animationDirection}
           >
             <FormField 
@@ -495,7 +552,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
           {/* Has Computer */}
           <FormStep 
             language={language} 
-            isActive={currentStep === 9} 
+            isActive={currentStep === 10} 
             direction={animationDirection}
           >
             <FormField 
@@ -519,7 +576,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
           {/* Course Type */}
           <FormStep 
             language={language} 
-            isActive={currentStep === 10} 
+            isActive={currentStep === 11} 
             direction={animationDirection}
           >
             <FormField 
@@ -543,7 +600,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
           {/* Contact For Details */}
           <FormStep 
             language={language} 
-            isActive={currentStep === 11} 
+            isActive={currentStep === 12} 
             direction={animationDirection}
           >
             <FormField 

@@ -49,6 +49,11 @@ export interface Translations {
       title: string;
       placeholder: string;
     };
+    learnedProgramming: {
+      title: string;
+      yes: string;
+      no: string;
+    };
     previousCourse: {
       title: string;
       yes: string;
@@ -133,6 +138,11 @@ const translations: Record<Language, Translations> = {
       childGrade: {
         title: "What grade is the student in?",
         placeholder: "Select grade",
+      },
+      learnedProgramming: {
+        title: "Has the student learned programming before?",
+        yes: "Yes",
+        no: "No",
       },
       previousCourse: {
         title: "Has the student participated in programming competitions before?",
@@ -230,6 +240,11 @@ const translations: Record<Language, Translations> = {
       childGrade: {
         title: "الصف الدراسي للطالب",
         placeholder: "اختر الصف",
+      },
+      learnedProgramming: {
+        title: "هل سبق وتعلم الطالب البرمجة من قبل؟",
+        yes: "نعم",
+        no: "لا",
       },
       previousCourse: {
         title: "هل سبق وشارك الطالب في مسابقات برمجه؟",
