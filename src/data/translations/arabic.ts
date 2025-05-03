@@ -51,12 +51,12 @@ const arabicTranslations: Translations = {
       placeholder: "اختر الصف",
     },
     learnedProgramming: {
-      title: "هل سبق وتعلم الطالب البرمجة من قبل؟",
+      title: "هل سبق ان تعلم الطالب البرمجة من قبل؟",
       yes: "نعم",
       no: "لا",
     },
     previousCourse: {
-      title: "هل سبق وشارك الطالب في مسابقات برمجه؟",
+      title: "هل سبق ان شارك الطالب في مسابقات برمجه؟",
       yes: "نعم",
       no: "لا",
     },
