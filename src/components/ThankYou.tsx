@@ -2,7 +2,7 @@ import React from "react";
 import { Language } from "../data/translations";
 import translations from "../data/translations";
 import Logo from "./Logo";
-import { CheckCircle2 } from "lucide-react"; // npm install lucide-react
+import { CheckCircle2 } from "lucide-react";
 
 interface ThankYouProps {
   language: Language;
