@@ -20,20 +20,33 @@ export const useFormSubmission = (language: Language) => {
     return "other";
   };
 
+  // Helper function to convert Arabic digits to English digits
+  const normalizeDigits = (value: string): string => {
+    if (!value) return value;
+    return value.replace(/[\u0660-\u0669]/g, (d) => {
+      return String.fromCharCode(d.charCodeAt(0) - 0x0660 + 48);
+    });
+  };
+
   const submitForm = async (formData: FormData) => {
     try {
       setIsSubmitting(true);
+      
+      // Normalize any Arabic digits to English digits
+      const normalizedAge = normalizeDigits(formData.childAge);
+      const normalizedMobileNumber = normalizeDigits(formData.mobileNumber);
+      const normalizedWhatsAppNumber = formData.whatsAppNumber ? normalizeDigits(formData.whatsAppNumber) : null;
       
       // Map form data to database column names - Fix column names to match database schema
       // Important: previousprogramming stores whether they learned programming before
       // coursename stores the competition details if they participated before
       const dataToInsert = {
         guardianname: formData.guardianName,
-        mobilenumber: formData.mobileNumber,
-        whatsappnumber: formData.whatsAppNumber || null, // Handle optional field
+        mobilenumber: normalizedMobileNumber,
+        whatsappnumber: normalizedWhatsAppNumber, // Handle optional field
         email: formData.email || null, // Handle optional field
         childname: formData.childName,
-        age: parseInt(formData.childAge),
+        age: parseInt(normalizedAge),
         grade: formData.childGrade,
         // The database only has previousprogramming field, not learnedprogramming
         previousprogramming: formData.learnedProgramming, // Store if they learned programming before
@@ -41,7 +54,7 @@ export const useFormSubmission = (language: Language) => {
         hascomputer: formData.hasComputer,
         preferredcoursetype: formData.courseType,
         contactconsent: formData.contactForDetails,
-        agecategory: getAgeCategory(parseInt(formData.childAge))
+        agecategory: getAgeCategory(parseInt(normalizedAge))
       };
       
       // For debugging

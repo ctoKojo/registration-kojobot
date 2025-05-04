@@ -11,6 +11,7 @@ interface FormInputProps {
   max?: number;
   required?: boolean;
   dir?: "rtl" | "ltr" | "auto";
+  inputMode?: "text" | "numeric" | "tel" | "email" | "url" | "search" | "none" | "decimal";
 }
 
 const FormInput: React.FC<FormInputProps> = ({
@@ -23,6 +24,7 @@ const FormInput: React.FC<FormInputProps> = ({
   max,
   required = false,
   dir = "auto",
+  inputMode,
 }) => {
   return (
     <input
@@ -35,6 +37,7 @@ const FormInput: React.FC<FormInputProps> = ({
       max={max}
       required={required}
       dir={dir}
+      inputMode={inputMode}
       className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all text-sm sm:text-base"
     />
   );

@@ -48,6 +48,7 @@ const ChildInfoSteps: React.FC<ChildInfoStepsProps> = ({
             placeholder={t.questions.childName.placeholder}
             required
             dir={language === 'ar' ? "rtl" : "ltr"}
+            inputMode="text"
           />
         </FormField>
       </FormStep>
@@ -65,15 +66,14 @@ const ChildInfoSteps: React.FC<ChildInfoStepsProps> = ({
           language={language}
         >
           <FormInput
-            type="number"
+            type="text" // Changed from "number" to "text" to support Arabic digits
             name="childAge"
             value={formData.childAge}
             onChange={handleInputChange}
             placeholder={t.questions.childAge.placeholder}
             required
-            min={6}
-            max={18}
             dir="ltr" // Numbers are always LTR
+            inputMode="numeric" // Show numeric keyboard
           />
         </FormField>
       </FormStep>

@@ -39,6 +39,19 @@ export const useFormValidation = (language: Language) => {
   const t = translations[language];
   const [errors, setErrors] = useState<FormErrors>({});
 
+  // Helper function to validate phone numbers - accepts both Arabic and English digits
+  const isValidPhoneNumber = (phone: string): boolean => {
+    // Accept Arabic digits (٠-٩) or English digits (0-9)
+    return /^[\u0660-\u0669\d]+$/.test(phone);
+  };
+
+  // Helper function to convert Arabic digits to English digits if needed
+  const normalizeDigits = (value: string): string => {
+    return value.replace(/[\u0660-\u0669]/g, (d) => {
+      return String.fromCharCode(d.charCodeAt(0) - 0x0660 + 48);
+    });
+  };
+
   const validateStep = (currentStep: number, formData: FormData): boolean => {
     const newErrors: FormErrors = {};
     
@@ -51,12 +64,12 @@ export const useFormValidation = (language: Language) => {
       case 1: // Mobile Number
         if (!formData.mobileNumber) {
           newErrors.mobileNumber = t.errors.required;
-        } else if (!/^\d+$/.test(formData.mobileNumber)) {
+        } else if (!isValidPhoneNumber(formData.mobileNumber)) {
           newErrors.mobileNumber = t.errors.invalidPhone;
         }
         break;
       case 2: // WhatsApp Number (optional)
-        if (formData.whatsAppNumber && !/^\d+$/.test(formData.whatsAppNumber)) {
+        if (formData.whatsAppNumber && !isValidPhoneNumber(formData.whatsAppNumber)) {
           newErrors.whatsAppNumber = t.errors.invalidPhone;
         }
         break;
@@ -74,7 +87,9 @@ export const useFormValidation = (language: Language) => {
         if (!formData.childAge) {
           newErrors.childAge = t.errors.required;
         } else {
-          const age = parseInt(formData.childAge);
+          // Convert Arabic digits to English digits if present
+          const normalizedAge = normalizeDigits(formData.childAge);
+          const age = parseInt(normalizedAge);
           if (isNaN(age) || age < 6 || age > 18) {
             newErrors.childAge = t.errors.invalidAge;
           }

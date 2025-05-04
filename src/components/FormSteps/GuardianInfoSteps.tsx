@@ -47,6 +47,7 @@ const GuardianInfoSteps: React.FC<GuardianInfoStepsProps> = ({
             placeholder={t.questions.guardianName.placeholder}
             required
             dir={language === 'ar' ? "rtl" : "ltr"}
+            inputMode="text"
           />
         </FormField>
       </FormStep>
@@ -70,6 +71,7 @@ const GuardianInfoSteps: React.FC<GuardianInfoStepsProps> = ({
             placeholder={t.questions.mobileNumber.placeholder}
             required
             dir="ltr" // Phone numbers are always LTR
+            inputMode="tel"
           />
         </FormField>
       </FormStep>
@@ -93,6 +95,7 @@ const GuardianInfoSteps: React.FC<GuardianInfoStepsProps> = ({
             onChange={handleInputChange}
             placeholder={t.questions.whatsAppNumber.placeholder}
             dir="ltr" // Phone numbers are always LTR
+            inputMode="tel"
           />
         </FormField>
       </FormStep>
@@ -116,6 +119,7 @@ const GuardianInfoSteps: React.FC<GuardianInfoStepsProps> = ({
             onChange={handleInputChange}
             placeholder={t.questions.email.placeholder}
             dir="ltr" // Emails are always LTR
+            inputMode="email"
           />
         </FormField>
       </FormStep>
