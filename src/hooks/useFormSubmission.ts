@@ -34,7 +34,7 @@ export const useFormSubmission = (language: Language) => {
         age: parseInt(formData.childAge),
         grade: formData.childGrade,
         learnedprogramming: formData.learnedProgramming,
-        previousprogramming: formData.learnedProgramming === "yes" ? formData.previousCourse : null,
+        previousprogramming: formData.previousCourse, // Fixed: this was incorrectly using learnedProgramming
         coursename: formData.previousCourse === "yes" ? formData.courseName : null, // Handle conditional field
         hascomputer: formData.hasComputer,
         preferredcoursetype: formData.courseType,
@@ -59,9 +59,16 @@ export const useFormSubmission = (language: Language) => {
       return true;
     } catch (error) {
       console.error("Error submitting form:", error);
+      // Improve error handling to prevent [object Object] display
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : typeof error === 'object' && error !== null
+          ? JSON.stringify(error)
+          : String(error);
+          
       toast({
         title: t.errors.submission,
-        description: error instanceof Error ? error.message : String(error),
+        description: errorMessage,
         variant: "destructive",
       });
       return false;
