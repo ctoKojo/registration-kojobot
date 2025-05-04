@@ -24,7 +24,7 @@ export const useFormSubmission = (language: Language) => {
     try {
       setIsSubmitting(true);
       
-      // Map form data to database column names
+      // Map form data to database column names - Fix column names to match database schema
       const dataToInsert = {
         guardianname: formData.guardianName,
         mobilenumber: formData.mobileNumber,
@@ -33,14 +33,17 @@ export const useFormSubmission = (language: Language) => {
         childname: formData.childName,
         age: parseInt(formData.childAge),
         grade: formData.childGrade,
-        learnedprogramming: formData.learnedProgramming,
-        previousprogramming: formData.previousCourse, // Fixed: this was incorrectly using learnedProgramming
+        // Fix: Remove learnedprogramming as it doesn't exist in the database
+        previousprogramming: formData.learnedProgramming, // Store the learned programming value in previousprogramming instead
         coursename: formData.previousCourse === "yes" ? formData.courseName : null, // Handle conditional field
         hascomputer: formData.hasComputer,
         preferredcoursetype: formData.courseType,
         contactconsent: formData.contactForDetails,
         agecategory: getAgeCategory(parseInt(formData.childAge))
       };
+      
+      // For debugging
+      console.log("Submitting data to Supabase:", dataToInsert);
       
       // Insert data into Supabase
       const { error } = await supabase
