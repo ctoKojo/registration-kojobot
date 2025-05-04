@@ -25,6 +25,8 @@ export const useFormSubmission = (language: Language) => {
       setIsSubmitting(true);
       
       // Map form data to database column names - Fix column names to match database schema
+      // Important: previousprogramming stores whether they learned programming before
+      // coursename stores the competition details if they participated before
       const dataToInsert = {
         guardianname: formData.guardianName,
         mobilenumber: formData.mobileNumber,
@@ -33,9 +35,9 @@ export const useFormSubmission = (language: Language) => {
         childname: formData.childName,
         age: parseInt(formData.childAge),
         grade: formData.childGrade,
-        // Fix: Remove learnedprogramming as it doesn't exist in the database
-        previousprogramming: formData.learnedProgramming, // Store the learned programming value in previousprogramming instead
-        coursename: formData.previousCourse === "yes" ? formData.courseName : null, // Handle conditional field
+        // The database only has previousprogramming field, not learnedprogramming
+        previousprogramming: formData.learnedProgramming, // Store if they learned programming before
+        coursename: formData.previousCourse === "yes" ? formData.courseName : null, // Store competition details if they participated
         hascomputer: formData.hasComputer,
         preferredcoursetype: formData.courseType,
         contactconsent: formData.contactForDetails,
