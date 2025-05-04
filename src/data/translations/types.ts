@@ -69,6 +69,7 @@ export interface TranslationErrors {
   required: string;
   invalidEmail: string;
   invalidPhone: string;
+  invalidPhoneLength: string;
   invalidAge: string;
   submission: string;
 }

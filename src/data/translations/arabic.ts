@@ -85,6 +85,7 @@ const arabicTranslations: Translations = {
     required: "هذا الحقل مطلوب",
     invalidEmail: "الرجاء إدخال بريد إلكتروني صحيح",
     invalidPhone: "الرجاء إدخال رقم هاتف صحيح",
+    invalidPhoneLength: "يجب أن يكون رقم الهاتف ١٠ أرقام على الأقل",
     invalidAge: "يجب أن يكون العمر بين 6 و 18 سنة",
     submission: "حدث خطأ أثناء تقديم النموذج. الرجاء المحاولة مرة أخرى.",
   },

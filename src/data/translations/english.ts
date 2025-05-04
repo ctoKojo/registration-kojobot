@@ -85,6 +85,7 @@ const englishTranslations: Translations = {
     required: "This field is required",
     invalidEmail: "Please enter a valid email address",
     invalidPhone: "Please enter a valid phone number",
+    invalidPhoneLength: "Phone number must be at least 10 digits",
     invalidAge: "Age must be between 6 and 18",
     submission: "There was an error submitting the form. Please try again.",
   },

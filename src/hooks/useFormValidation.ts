@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Language } from "../data/translations";
 import translations from "../data/translations";
@@ -39,10 +38,16 @@ export const useFormValidation = (language: Language) => {
   const t = translations[language];
   const [errors, setErrors] = useState<FormErrors>({});
 
-  // Helper function to validate phone numbers - accepts both Arabic and English digits
+  // Helper function to validate phone numbers - accepts both Arabic and English digits with minimum length
   const isValidPhoneNumber = (phone: string): boolean => {
     // Accept Arabic digits (٠-٩) or English digits (0-9)
-    return /^[\u0660-\u0669\d]+$/.test(phone);
+    if (!/^[\u0660-\u0669\d]+$/.test(phone)) {
+      return false;
+    }
+    
+    // Check if phone number has at least 10 digits
+    const normalizedPhone = normalizeDigits(phone);
+    return normalizedPhone.length >= 10;
   };
 
   // Helper function to convert Arabic digits to English digits if needed
@@ -65,12 +70,22 @@ export const useFormValidation = (language: Language) => {
         if (!formData.mobileNumber) {
           newErrors.mobileNumber = t.errors.required;
         } else if (!isValidPhoneNumber(formData.mobileNumber)) {
-          newErrors.mobileNumber = t.errors.invalidPhone;
+          const normalizedPhone = normalizeDigits(formData.mobileNumber);
+          if (normalizedPhone.length < 10) {
+            newErrors.mobileNumber = t.errors.invalidPhoneLength;
+          } else {
+            newErrors.mobileNumber = t.errors.invalidPhone;
+          }
         }
         break;
       case 2: // WhatsApp Number (optional)
         if (formData.whatsAppNumber && !isValidPhoneNumber(formData.whatsAppNumber)) {
-          newErrors.whatsAppNumber = t.errors.invalidPhone;
+          const normalizedPhone = normalizeDigits(formData.whatsAppNumber);
+          if (normalizedPhone.length < 10) {
+            newErrors.whatsAppNumber = t.errors.invalidPhoneLength;
+          } else {
+            newErrors.whatsAppNumber = t.errors.invalidPhone;
+          }
         }
         break;
       case 3: // Email (optional)
